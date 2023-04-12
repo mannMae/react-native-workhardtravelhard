@@ -44,8 +44,10 @@ export default function App() {
 
   const loadTodos = async () => {
     try {
-      const savedTodos = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
-      setTodos(savedTodos);
+      const savedTodos = await AsyncStorage.getItem(STORAGE_KEY);
+      if (savedTodos) {
+        setTodos(JSON.parse(savedTodos));
+      }
     } catch {
       console.error(error);
     }
